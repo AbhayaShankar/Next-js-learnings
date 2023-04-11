@@ -1,14 +1,13 @@
 import { useRouter } from "next/router";
 
-function SingleCLieentProjectPage() {
+function BlogPostPage() {
   const router = useRouter();
-
   console.log(router.query);
   return (
     <div>
-      <h1>Single CLient Project page</h1>
+      <h1>The blog post page</h1>
     </div>
   );
 }
 
-export default SingleCLieentProjectPage;
+export default BlogPostPage;
