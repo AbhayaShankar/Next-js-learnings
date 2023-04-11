@@ -13,7 +13,19 @@ function ClientPage() {
       <ul>
         {clientsArr.map((item) => (
           <li key={item.id}>
-            <Link href={`/clients/${item.id}`}>{item.name}</Link>
+            {/* Two ways of creating a Link segment, we can give pathname and query
+            value to the link instead of the long string value */}
+
+            {/* <Link href={`/clients/${item.id}`}>{item.name}</Link> */}
+
+            <Link
+              href={{
+                pathname: "/clients/[id]",
+                query: { id: item.id },
+              }}
+            >
+              {item.name}
+            </Link>
           </li>
         ))}
       </ul>
