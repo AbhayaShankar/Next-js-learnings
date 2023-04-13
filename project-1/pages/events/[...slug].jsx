@@ -1,6 +1,9 @@
 import { useRouter } from "next/router";
 import { getFilteredEvents } from "../../Dummydata";
 import EventList from "../../components/events/EventList";
+import { Fragment } from "react";
+import ResultsTitle from "../../components/events/results-title";
+import Button from "../../components/ui/button";
 
 function FilteredEventsPage() {
   const router = useRouter();
@@ -9,7 +12,17 @@ function FilteredEventsPage() {
   console.log(filterData);
 
   if (!filterData) {
-    return <p className="center">Loading...</p>;
+    return (
+      <p
+        style={{
+          marginBottom: "30px",
+          fontSize: "28px",
+          fontWeight: "700",
+        }}
+      >
+        Loading...
+      </p>
+    );
   }
 
   const filterYear = filterData[0];
@@ -27,9 +40,20 @@ function FilteredEventsPage() {
     numMonth < 1
   ) {
     return (
-      <p className="center">
-        Invalid Filter... Please enter Year below 2028 and after 2020...
-      </p>
+      <Fragment>
+        <div className="center">
+          <p
+            style={{
+              marginBottom: "30px",
+              fontSize: "28px",
+              fontWeight: "700",
+            }}
+          >
+            Invalid Filter... Please enter Year below 2028 and after 2020...
+          </p>
+          <Button link="/events">Show All Events</Button>
+        </div>
+      </Fragment>
     );
   }
 
@@ -42,17 +66,31 @@ function FilteredEventsPage() {
 
   if (!filterEvents || filterEvents.length === 0) {
     return (
-      <p className="center">
-        events not found in the database or no proper match for the filter
-        applied.
-      </p>
+      <Fragment>
+        <div className="center">
+          <p
+            style={{
+              marginBottom: "30px",
+              fontSize: "28px",
+              fontWeight: "700",
+            }}
+          >
+            events not found in the database or no proper match for the filter
+            applied.
+          </p>
+          <Button link="/events">Show All Events</Button>
+        </div>
+      </Fragment>
     );
   }
 
+  const date = new Date(numYear, numMonth - 1);
+
   return (
-    <div>
+    <Fragment>
+      <ResultsTitle date={date} />
       <EventList featuredEvents={filterEvents} />
-    </div>
+    </Fragment>
   );
 }
 
