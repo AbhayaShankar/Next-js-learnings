@@ -1,4 +1,9 @@
 import { useRouter } from "next/router";
+import classes from "./EventItems.module.css";
+import Button from "../ui/button";
+import DateIcon from "../icons/date-icon";
+import AddressIcon from "../icons/address-icon";
+import ArrowRightIcon from "../icons/arrow-right-icon";
 
 function EventItems({ title, id, location, image, date }) {
   const router = useRouter();
@@ -17,20 +22,27 @@ function EventItems({ title, id, location, image, date }) {
   };
 
   return (
-    <li key={id}>
+    <li className={classes.item} key={id}>
       <img src={"/" + image} alt="" />
-      <div>
-        <div>
+      <div className={classes.content}>
+        <div className={classes.content}>
           <h2>{title}</h2>
-          <div>
+          <div className={classes.date}>
+            <DateIcon />
             <time>{humanReadableDate}</time>
           </div>
-          <div>
+          <div className={classes.address}>
+            <AddressIcon />
             <address>{humanReadableAddress}</address>
           </div>
         </div>
-        <div>
-          <button onClick={handleNavigate}>Checkout Event</button>
+        <div className={classes.actions}>
+          <Button link={`/events/${id}`}>
+            <span>Explore Events</span>
+            <span className={classes.icon}>
+              <ArrowRightIcon />
+            </span>
+          </Button>
         </div>
       </div>
     </li>

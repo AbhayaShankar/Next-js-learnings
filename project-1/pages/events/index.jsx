@@ -1,12 +1,12 @@
-import { useRouter } from "next/router";
 import Link from "next/link";
-
+// import { useRouter } from "next/router";
 function EventsPage() {
-  const router = useRouter();
+  // const router = useRouter();
 
   //   const openEventDetail = () => {
   //     router.push("/events/[id]");
   //   };
+
   return (
     <div>
       <h1>Main Events Page</h1>
