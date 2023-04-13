@@ -1,36 +1,45 @@
-import { useRouter } from "next/router";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
+import { getAllEvents } from "../../Dummydata";
+import EventList from "../../components/events/EventList";
+import { Fragment, useEffect, useState } from "react";
+import EventsSearch from "../../components/events/EventSearch";
 function EventsPage() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const events = getAllEvents();
 
-  //   const openEventDetail = () => {
-  //     router.push("/events/[id]");
-  //   };
+  const findSelectedEvents = (year, month) => {
+    const fullPath = `/events/${year}/${month}`;
+    router.push(fullPath);
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, []);
+
   return (
-    <div>
-      <h1>Main Events Page</h1>
-      <Link
-        href={{
-          pathname: "/events/[id]",
-          query: { id: "id" },
-        }}
-      >
-        <button
-          //   onClick={openEventDetail}
+    <Fragment>
+      <EventsSearch onSearch={findSelectedEvents} />
+      {!loading ? (
+        <EventList featuredEvents={events} />
+      ) : (
+        <div
           style={{
-            color: "white",
-            backgroundColor: "#212121",
-            padding: "8px 15px",
-            borderRadius: "12px",
-            letterSpacing: "0.8px",
-            marginTop: "20px",
+            fontSize: "40px",
+            textAlign: "center",
+            letterSpacing: "2px",
+            height: "100%",
+            marginTop: "200px ",
           }}
         >
-          Read More 👉🚀
-        </button>
-      </Link>
-    </div>
+          <h1>Loading...</h1>
+        </div>
+      )}
+    </Fragment>
   );
 }
 
