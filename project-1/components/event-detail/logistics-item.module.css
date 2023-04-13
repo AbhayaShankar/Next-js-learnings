@@ -25,5 +25,7 @@
   .item {
     align-items: flex-start;
     text-align: left;
+    /* flex-direction: row;
+    align-items: center; */
   }
 }

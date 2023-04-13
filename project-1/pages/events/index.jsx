@@ -1,23 +1,43 @@
 import Link from "next/link";
-// import { useRouter } from "next/router";
+import { getAllEvents } from "../../Dummydata";
+import EventList from "../../components/events/EventList";
+import { useEffect, useState } from "react";
 function EventsPage() {
-  // const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const events = getAllEvents();
 
-  //   const openEventDetail = () => {
-  //     router.push("/events/[id]");
-  //   };
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  });
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          fontSize: "40px",
+          textAlign: "center",
+          letterSpacing: "2px",
+          height: "100%",
+          marginTop: "200px ",
+        }}
+      >
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <h1>Main Events Page</h1>
-      <Link
+      {!loading && <EventList featuredEvents={events} />}
+      {/* <Link
         href={{
           pathname: "/events/[id]",
           query: { id: "id" },
         }}
       >
         <button
-          //   onClick={openEventDetail}
           style={{
             color: "white",
             backgroundColor: "#212121",
@@ -29,7 +49,7 @@ function EventsPage() {
         >
           Read More 👉🚀
         </button>
-      </Link>
+      </Link> */}
     </div>
   );
 }

@@ -29,6 +29,16 @@ const DUMMY_EVENTS = [
     image: "media/3.webp",
     isFeatured: true,
   },
+  {
+    id: "e4",
+    title: "Friendship is Happiness",
+    description:
+      "We all remember the first friend of our life or perhaps the bestfriends of yours. The relation is far greater than any jewel or money, it's not based on any presumptions",
+    location: "My Coast way, 105 Backstreet Bay",
+    date: "2022-08-02",
+    image: "media/friend.jpg",
+    isFeatured: false,
+  },
 ];
 
 export function getFeaturedEvents() {
