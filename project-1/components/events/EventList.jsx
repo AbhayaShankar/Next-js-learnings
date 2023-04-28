@@ -6,7 +6,7 @@ function EventList({ featuredEvents }) {
     <ul className={classes.list}>
       {featuredEvents.map((event) => (
         <div key={event.id}>
-          {console.log(event)}
+          {/* {console.log(event)} */}
           <EventItems
             key={event.id}
             title={event.title}

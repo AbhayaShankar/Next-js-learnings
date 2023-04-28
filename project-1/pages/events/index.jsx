@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { getAllEvents } from "../../Dummydata";
+import { getAllEvents } from "../../helpers/api-utils";
 import EventList from "../../components/events/EventList";
 import { Fragment, useEffect, useState } from "react";
 import EventsSearch from "../../components/events/EventSearch";
-function EventsPage() {
+
+function EventsPage({ events }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const events = getAllEvents();
 
   const findSelectedEvents = (year, month) => {
     const fullPath = `/events/${year}/${month}`;
@@ -41,6 +41,15 @@ function EventsPage() {
       )}
     </Fragment>
   );
+}
+
+export async function getServerSideProps(context) {
+  const events = await getAllEvents();
+  return {
+    props: {
+      events: events,
+    },
+  };
 }
 
 export default EventsPage;

@@ -16,10 +16,10 @@ function EventItems({ title, id, location, image, date }) {
 
   const humanReadableAddress = location.replace(", ", "\n\n");
 
-  const handleNavigate = () => {
-    console.log("HELLoooo");
-    router.push(`/events/${id}`);
-  };
+  // const handleNavigate = () => {
+  //   console.log("HELLoooo");
+  //   router.push(`/events/${id}`);
+  // };
 
   return (
     <li className={classes.item} key={id}>
