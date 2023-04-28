@@ -14,13 +14,6 @@ function EventsPage({ events }) {
     router.push(fullPath);
   };
 
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  }, []);
-
   return (
     <Fragment>
       <EventsSearch onSearch={findSelectedEvents} />
@@ -43,12 +36,13 @@ function EventsPage({ events }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const events = await getAllEvents();
   return {
     props: {
       events: events,
     },
+    revalidate: 30,
   };
 }
 
