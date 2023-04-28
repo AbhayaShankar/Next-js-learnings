@@ -45,11 +45,14 @@ function FilteredEventsPage() {
           <p
             style={{
               marginBottom: "30px",
-              fontSize: "28px",
+              fontSize: "20px",
               fontWeight: "700",
+              letterSpacing: 0.25,
             }}
           >
             Invalid Filter... Please enter Year below 2028 and after 2020...
+            <br />
+            If not then kindly check if Month is correctly entered .
           </p>
           <Button link="/events">Show All Events</Button>
         </div>
