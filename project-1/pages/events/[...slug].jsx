@@ -1,44 +1,35 @@
 import { useRouter } from "next/router";
-import { getFilteredEvents } from "../../Dummydata";
+import { getFilteredEvents } from "../../helpers/api-utils";
 import EventList from "../../components/events/EventList";
 import { Fragment } from "react";
 import ResultsTitle from "../../components/events/results-title";
 import Button from "../../components/ui/button";
 
-function FilteredEventsPage() {
+function FilteredEventsPage({ hasError, events, DATE }) {
   const router = useRouter();
-  const filterData = router.query.slug;
+  // const filterData = router.query.slug;
 
-  console.log(filterData);
+  // if (!filterData) {
+  //   return (
+  //     <p
+  //       style={{
+  //         marginBottom: "30px",
+  //         fontSize: "28px",
+  //         fontWeight: "700",
+  //       }}
+  //     >
+  //       Loading...
+  //     </p>
+  //   );
+  // }
 
-  if (!filterData) {
-    return (
-      <p
-        style={{
-          marginBottom: "30px",
-          fontSize: "28px",
-          fontWeight: "700",
-        }}
-      >
-        Loading...
-      </p>
-    );
-  }
+  // const filterYear = filterData[0];
+  // const filterMonth = filterData[1];
 
-  const filterYear = filterData[0];
-  const filterMonth = filterData[1];
+  // const numYear = +filterYear;
+  // const numMonth = +filterMonth;
 
-  const numYear = +filterYear;
-  const numMonth = +filterMonth;
-
-  if (
-    isNaN(numYear) ||
-    isNaN(numMonth) ||
-    numYear > 2028 ||
-    numYear < 2020 ||
-    numMonth > 12 ||
-    numMonth < 1
-  ) {
+  if (hasError) {
     return (
       <Fragment>
         <div className="center">
@@ -60,10 +51,7 @@ function FilteredEventsPage() {
     );
   }
 
-  const filterEvents = getFilteredEvents({
-    year: numYear,
-    month: numMonth,
-  });
+  const filterEvents = events;
 
   // For events not found in the data, I would want to return a message for events not found in the database or no proper match for the filter applied.
 
@@ -87,7 +75,7 @@ function FilteredEventsPage() {
     );
   }
 
-  const date = new Date(numYear, numMonth - 1);
+  const date = new Date(DATE.YEAR, DATE.MONTH - 1);
 
   return (
     <Fragment>
@@ -95,6 +83,52 @@ function FilteredEventsPage() {
       <EventList featuredEvents={filterEvents} />
     </Fragment>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const filterData = params.slug;
+
+  const filterYear = filterData[0];
+  const filterMonth = filterData[1];
+
+  const numYear = +filterYear;
+  const numMonth = +filterMonth;
+
+  if (
+    isNaN(numYear) ||
+    isNaN(numMonth) ||
+    numYear > 2028 ||
+    numYear < 2020 ||
+    numMonth > 12 ||
+    numMonth < 1
+  ) {
+    return {
+      props: {
+        hasError: true,
+      },
+      // notFound: true,
+      // We can redirect the page if we have any errror page defined.
+      // redirect: {
+      //   destination: "/error"
+      // }
+    };
+  }
+
+  const filterEvents = await getFilteredEvents({
+    year: numYear,
+    month: numMonth,
+  });
+
+  return {
+    props: {
+      events: filterEvents,
+      DATE: {
+        YEAR: numYear,
+        MONTH: numMonth,
+      },
+    },
+  };
 }
 
 export default FilteredEventsPage;
