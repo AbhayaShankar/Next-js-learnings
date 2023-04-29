@@ -11,8 +11,10 @@ function FilteredEventsPage() {
   const router = useRouter();
   const filterData = router.query.slug;
 
+  const fetcher = (url) => fetch(url).then((res) => res.json());
   const { data, error } = useSWR(
-    "https://next-js-45b5e-default-rtdb.firebaseio.com/events.json"
+    "https://next-js-45b5e-default-rtdb.firebaseio.com/events.json",
+    fetcher
   );
 
   console.log(data);
