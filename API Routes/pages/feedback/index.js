@@ -1,11 +1,11 @@
 import { Fragment, useState } from "react";
-import { buildFeedbackPath, extractFeedback } from "../api/feedback";
+import { buildFeedbackPath, extractFeedback } from "../api/feedback/index";
 
 function FeedbackPage({ feedbackItems }) {
   const [feedbackData, setFeedbackData] = useState();
 
   function loadFeedback(id) {
-    fetch(`/api/${id}`)
+    fetch(`/api/feedback/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setFeedbackData(data.feedback);
