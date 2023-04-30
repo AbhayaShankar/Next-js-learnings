@@ -1,12 +1,31 @@
+import { Fragment, useState } from "react";
 import { buildFeedbackPath, extractFeedback } from "../api/feedback";
 
 function FeedbackPage({ feedbackItems }) {
+  const [feedbackData, setFeedbackData] = useState();
+
+  function loadFeedback(id) {
+    fetch(`/api/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setFeedbackData(data.feedback);
+      });
+  }
+
   return (
-    <ul>
-      {feedbackItems.map((item) => (
-        <li key={item.id}>{item.text}</li>
-      ))}
-    </ul>
+    <Fragment>
+      {feedbackData && <span>{feedbackData.email}</span>}
+      <ul>
+        {feedbackItems.map((item) => (
+          <li key={item.id}>
+            {item.text}
+            <button onClick={loadFeedback.bind(null, item.id)}>
+              Show Feedback Detail
+            </button>
+          </li>
+        ))}
+      </ul>
+    </Fragment>
   );
 }
 
