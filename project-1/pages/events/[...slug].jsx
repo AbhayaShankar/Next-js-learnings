@@ -5,6 +5,7 @@ import { React, Fragment, useEffect, useState } from "react";
 import ResultsTitle from "../../components/events/results-title";
 import Button from "../../components/ui/button";
 import useSWR from "swr";
+import Head from "next/head";
 
 function FilteredEventsPage() {
   const [loadedEvents, setLoadedEvents] = useState();
@@ -34,26 +35,41 @@ function FilteredEventsPage() {
     }
   }, [data]);
 
-  if (!loadedEvents && !error) {
-    return (
-      <p
-        className="center"
-        style={{
-          marginBottom: "30px",
-          fontSize: "28px",
-          fontWeight: "700",
-        }}
-      >
-        Loading...
-      </p>
-    );
-  }
-
   const filterYear = filterData[0];
   const filterMonth = filterData[1];
 
   const numYear = +filterYear;
   const numMonth = +filterMonth;
+
+  const pageHeader = (
+    <Head>
+      <title>
+        Filtered Events {numMonth}/{numYear}
+      </title>
+      <meta
+        name="decsription"
+        content={`filtered events for ${numMonth}/${numYear}`}
+      />
+    </Head>
+  );
+
+  if (!loadedEvents && !error) {
+    return (
+      <Fragment>
+        {pageHeader}
+        <p
+          className="center"
+          style={{
+            marginBottom: "30px",
+            fontSize: "28px",
+            fontWeight: "700",
+          }}
+        >
+          Loading...
+        </p>
+      </Fragment>
+    );
+  }
 
   if (
     isNaN(numYear) ||
@@ -66,6 +82,7 @@ function FilteredEventsPage() {
   ) {
     return (
       <Fragment>
+        {pageHeader}
         <div className="center">
           <p
             style={{
@@ -100,6 +117,7 @@ function FilteredEventsPage() {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <Fragment>
+        {pageHeader}
         <div className="center">
           <p
             style={{
@@ -121,6 +139,7 @@ function FilteredEventsPage() {
 
   return (
     <Fragment>
+      {pageHeader}
       <ResultsTitle date={date} />
       <EventList featuredEvents={filteredEvents} />
     </Fragment>

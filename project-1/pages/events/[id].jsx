@@ -4,6 +4,7 @@ import EventContent from "../../components/event-detail/event-content";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventSummary from "../../components/event-detail/event-summary";
 import { Fragment } from "react";
+import Head from "next/head";
 
 function EventDetailPage({ filterEvents }) {
   const event = filterEvents;
@@ -14,6 +15,10 @@ function EventDetailPage({ filterEvents }) {
 
   return (
     <Fragment>
+      <Head>
+        <title>{event.title} Events</title>
+        <meta name="decsription" content={event.description} />
+      </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}

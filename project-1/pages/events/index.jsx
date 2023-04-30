@@ -4,6 +4,7 @@ import { getAllEvents } from "../../helpers/api-utils";
 import EventList from "../../components/events/EventList";
 import { Fragment, useEffect, useState } from "react";
 import EventsSearch from "../../components/events/EventSearch";
+import Head from "next/head";
 
 function EventsPage({ events }) {
   const router = useRouter();
@@ -16,6 +17,10 @@ function EventsPage({ events }) {
 
   return (
     <Fragment>
+      <Head>
+        <title>All Events</title>
+        <meta name="decsription" content="List of all events." />
+      </Head>
       <EventsSearch onSearch={findSelectedEvents} />
       {!loading ? (
         <EventList featuredEvents={events} />

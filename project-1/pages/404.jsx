@@ -1,6 +1,15 @@
+import Head from "next/head";
+
 function ErrorPage() {
   return (
     <div className="center">
+      <Head>
+        <title>Error Page</title>
+        <meta
+          name="decsription"
+          content="Oops, there seems to be unexpected error."
+        />
+      </Head>
       <p
         style={{
           fontSize: "48px",
