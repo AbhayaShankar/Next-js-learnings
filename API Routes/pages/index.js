@@ -15,8 +15,6 @@ function HomePage() {
       text: enteredFeedback,
     };
 
-    // {email : "test@test.com" , text : "Feedback..."}
-
     fetch("/api/feedback", {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -31,7 +29,10 @@ function HomePage() {
   function loadFeedbackHandler() {
     fetch("/api/feedback")
       .then((response) => response.json())
-      .then((data) => setFeedbackData(data.feedback));
+      .then((data) => {
+        console.log("Feedback Data", data);
+        setFeedbackData(data.feedback);
+      });
   }
 
   return (
