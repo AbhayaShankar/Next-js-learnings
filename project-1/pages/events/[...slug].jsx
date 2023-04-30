@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { getFilteredEvents } from "../../helpers/api-utils";
 import EventList from "../../components/events/EventList";
 import { React, Fragment, useEffect, useState } from "react";
 import ResultsTitle from "../../components/events/results-title";
@@ -35,21 +34,10 @@ function FilteredEventsPage() {
     }
   }, [data]);
 
-  const filterYear = filterData[0];
-  const filterMonth = filterData[1];
-
-  const numYear = +filterYear;
-  const numMonth = +filterMonth;
-
-  const pageHeader = (
+  let pageHeader = (
     <Head>
-      <title>
-        Filtered Events {numMonth}/{numYear}
-      </title>
-      <meta
-        name="decsription"
-        content={`filtered events for ${numMonth}/${numYear}`}
-      />
+      <title>Filtered Events</title>
+      <meta name="decsription" content="A list of filtered events" />
     </Head>
   );
 
@@ -70,6 +58,24 @@ function FilteredEventsPage() {
       </Fragment>
     );
   }
+
+  const filterYear = filterData[0];
+  const filterMonth = filterData[1];
+
+  const numYear = +filterYear;
+  const numMonth = +filterMonth;
+
+  pageHeader = (
+    <Head>
+      <title>
+        Filtered Events {numMonth}/{numYear}
+      </title>
+      <meta
+        name="decsription"
+        content={`filtered events for ${numMonth}/${numYear}`}
+      />
+    </Head>
+  );
 
   if (
     isNaN(numYear) ||
