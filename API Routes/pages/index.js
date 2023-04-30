@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function HomePage() {
+  const [feedbackData, setFeedbackData] = useState([]);
   const emailInputRef = useRef();
   const feedbackInputRef = useRef();
 
@@ -8,13 +9,14 @@ function HomePage() {
     e.preventDefault();
     const enteredEmail = emailInputRef.current.value;
     const enteredFeedback = feedbackInputRef.current.value;
-    console.log(enteredEmail, enteredFeedback);
 
     const reqBody = {
       email: enteredEmail,
       text: enteredFeedback,
     };
+
     // {email : "test@test.com" , text : "Feedback..."}
+
     fetch("/api/feedback", {
       method: "POST",
       body: JSON.stringify(reqBody),
@@ -25,6 +27,12 @@ function HomePage() {
       .then((response) => response.json())
       .then((data) => console.log(data));
   };
+
+  function loadFeedbackHandler() {
+    fetch("/api/feedback")
+      .then((response) => response.json())
+      .then((data) => setFeedbackData(data.feedback));
+  }
 
   return (
     <div>
@@ -40,6 +48,13 @@ function HomePage() {
         </div>
         <button>Submit your Feedback</button>
       </form>
+      <hr />
+      <button onClick={loadFeedbackHandler}>Load Feedback</button>
+      <ul>
+        {feedbackData.map((item) => (
+          <li key={item.id}>{item.text}</li>
+        ))}
+      </ul>
     </div>
   );
 }
