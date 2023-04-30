@@ -25,6 +25,7 @@ export async function getStaticProps() {
   const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
   const jsonData = await fs.readFile(filePath);
   const data = JSON.parse(jsonData);
+  // console.log("JSON Parsed", jsonData);
 
   if (!data) {
     return {

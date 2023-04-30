@@ -53,9 +53,9 @@ export async function getStaticPaths() {
 
   const ids = data.products.map((prod) => prod.id);
 
-  const params = ids.map((id) => ({ params: { pid: id } }));
+  const paramslist = ids.map((id) => ({ params: { pid: id } }));
   return {
-    paths: params,
+    paths: paramslist,
     fallback: true,
 
     // 1. fallback: 'blocking',
