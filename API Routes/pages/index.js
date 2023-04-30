@@ -6,12 +6,10 @@ function HomePage() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted");
-
     const enteredEmail = emailInputRef.current.value;
     const enteredFeedback = feedbackInputRef.current.value;
-
     console.log(enteredEmail, enteredFeedback);
+    fetch(); // {email : "test@test.com" , text : "Feedback..."}
   };
 
   return (
