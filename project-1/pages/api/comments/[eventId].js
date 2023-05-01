@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-function CommentsHandler(req, res) {
+function handler(req, res) {
   if (req.method === "POST") {
     const email = req.body.email;
     const name = req.body.name;
@@ -26,4 +26,4 @@ function CommentsHandler(req, res) {
   }
 }
 
-export default CommentsHandler;
+export default handler;
