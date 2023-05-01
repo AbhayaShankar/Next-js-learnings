@@ -1,7 +1,5 @@
-import fs from "fs";
-import path from "path";
-
-function handler(req, res) {
+import { MongoClient } from "mongodb";
+async function handler(req, res) {
   if (req.method === "POST") {
     const email = req.body.email;
 
@@ -15,11 +13,14 @@ function handler(req, res) {
       email: email,
     };
 
-    // const filePath = path.join(process.cwd(), "data", "newsletter.json");
-    // const fileData = fs.readFileSync(filePath);
-    // const data = JSON.parse(fileData);
-    // data.push(newNewsletter);
-    // fs.writeFileSync(filePath, JSON.stringify(data));
+    const client = await MongoClient.connect(
+      "mongodb+srv://Abhaya:eZxG5or06nrJEbeD@cluster0.rcblahe.mongodb.net/?retryWrites=true&w=majority"
+    );
+    const db = client.db();
+
+    await db.collection("emails").insertOne({ email: email });
+
+    client.close();
 
     console.log(newNewsletter);
     res.status(201).json({ message: "Success" });

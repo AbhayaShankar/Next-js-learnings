@@ -1,7 +1,6 @@
-import fs from "fs";
-import path from "path";
+import { MongoClient } from "mongodb";
 
-function handler(req, res) {
+async function handler(req, res) {
   const eventId = req.query.eventId;
 
   if (req.method === "POST") {
@@ -26,12 +25,20 @@ function handler(req, res) {
       name,
       text,
     };
-    // const filePath = path.join(process.cwd(), "data", "comments.json");
-    // const fileData = fs.readFileSync(filePath);
-    // const data = JSON.parse(fileData);
-    // data.push(newFeedback);
-    // fs.writeFileSync(filePath, JSON.stringify(data));
     console.log(newComment);
+
+    const client = await MongoClient.connect(
+      "mongodb+srv://Abhaya:eZxG5or06nrJEbeD@cluster0.rcblahe.mongodb.net/?retryWrites=true&w=majority"
+    );
+
+    const db = client.db("Comments");
+
+    await db
+      .collection("Comments")
+      .insertOne({ email: email, name: name, text: text });
+
+    client.close();
+
     res
       .status(201)
       .json({ message: "This works perfectly", comment: newComment });
