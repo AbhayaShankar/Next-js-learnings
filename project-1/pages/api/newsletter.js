@@ -1,4 +1,19 @@
 import { MongoClient } from "mongodb";
+
+async function connectDatabase() {
+  const client = await MongoClient.connect(
+    "mongodb+srv://Abhaya:eZxG5or06nrJEbeD@cluster0.rcblahe.mongodb.net/newsletter?retryWrites=true&w=majority"
+  );
+
+  return client;
+}
+
+async function insertDocuments(client, documents) {
+  const db = client.db();
+
+  await db.collection("newsletter").insertOne(documents);
+}
+
 async function handler(req, res) {
   if (req.method === "POST") {
     const email = req.body.email;
@@ -13,16 +28,24 @@ async function handler(req, res) {
       email: email,
     };
 
-    const client = await MongoClient.connect(
-      "mongodb+srv://Abhaya:eZxG5or06nrJEbeD@cluster0.rcblahe.mongodb.net/events?retryWrites=true&w=majority"
-    );
-    const db = client.db();
+    let client;
 
-    await db.collection("newsletter").insertOne({ email: email });
+    try {
+      client = await connectDatabase();
+    } catch (error) {
+      res.status(500).json({ message: "Connecting to the Database failed" });
+      return;
+    }
 
-    client.close();
+    try {
+      await insertDocuments(client, { email: email });
+      client.close();
+    } catch (error) {
+      res.status(500).json({ message: "inserting Data failed" });
+      return;
+    }
 
-    console.log(newNewsletter);
+    // console.log(newNewsletter);
     res.status(201).json({ message: "Success" });
   }
 }
