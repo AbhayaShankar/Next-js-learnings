@@ -5,6 +5,7 @@ import EventLogistics from "../../components/event-detail/event-logistics";
 import EventSummary from "../../components/event-detail/event-summary";
 import { Fragment } from "react";
 import Head from "next/head";
+import Comments from "../../components/input/comments";
 
 function EventDetailPage({ filterEvents }) {
   const event = filterEvents;
@@ -29,6 +30,7 @@ function EventDetailPage({ filterEvents }) {
       <EventContent>
         <p>{event.description}</p>
       </EventContent>
+      <Comments eventId={event.id} />
     </Fragment>
   );
 }
