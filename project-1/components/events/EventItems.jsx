@@ -4,6 +4,7 @@ import Button from "../ui/button";
 import DateIcon from "../icons/date-icon";
 import AddressIcon from "../icons/address-icon";
 import ArrowRightIcon from "../icons/arrow-right-icon";
+import Image from "next/image";
 
 function EventItems({ title, id, location, image, date }) {
   const router = useRouter();
@@ -23,7 +24,7 @@ function EventItems({ title, id, location, image, date }) {
 
   return (
     <li className={classes.item} key={id}>
-      <img src={"/" + image} alt="" />
+      <Image src={"/" + image} alt="" width={500} height={200} />
       <div className={classes.content}>
         <div className={classes.content}>
           <h2>{title}</h2>
