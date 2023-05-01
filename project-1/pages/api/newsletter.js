@@ -14,11 +14,11 @@ async function handler(req, res) {
     };
 
     const client = await MongoClient.connect(
-      "mongodb+srv://Abhaya:eZxG5or06nrJEbeD@cluster0.rcblahe.mongodb.net/?retryWrites=true&w=majority"
+      "mongodb+srv://Abhaya:eZxG5or06nrJEbeD@cluster0.rcblahe.mongodb.net/events?retryWrites=true&w=majority"
     );
     const db = client.db();
 
-    await db.collection("emails").insertOne({ email: email });
+    await db.collection("newsletter").insertOne({ email: email });
 
     client.close();
 
