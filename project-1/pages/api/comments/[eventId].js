@@ -2,27 +2,49 @@ import fs from "fs";
 import path from "path";
 
 function handler(req, res) {
-  if (req.method === "POST") {
-    const email = req.body.email;
-    const name = req.body.name;
-    const Comment = req.body.text;
+  const eventId = req.query.eventId;
 
-    const newFeedback = {
+  if (req.method === "POST") {
+    const { email, name, text } = req.body;
+
+    // Server-side validation check...
+    if (
+      !email ||
+      !email.includes("@") ||
+      !name ||
+      name.trim() === "" ||
+      !text ||
+      text.trim() === ""
+    ) {
+      res.status(422).json({ message: "Invalid Inputs" });
+      return;
+    }
+
+    const newComment = {
       id: new Date().toISOString(),
-      email: email,
-      name: name,
-      text: Comment,
+      email,
+      name,
+      text,
     };
-    const filePath = path.join(process.cwd(), "data", "comments.json");
-    const fileData = fs.readFileSync(filePath);
-    const data = JSON.parse(fileData);
-    data.push(newFeedback);
-    fs.writeFileSync(filePath, JSON.stringify(data));
+    // const filePath = path.join(process.cwd(), "data", "comments.json");
+    // const fileData = fs.readFileSync(filePath);
+    // const data = JSON.parse(fileData);
+    // data.push(newFeedback);
+    // fs.writeFileSync(filePath, JSON.stringify(data));
+    console.log(newFeedback);
     res
       .status(201)
-      .json({ message: "This works perfectly", feedback: newFeedback });
-  } else {
-    res.status(200).json({ message: "Hello there!" });
+      .json({ message: "This works perfectly", comment: newComment });
+  }
+
+  if (req.method === "GET") {
+    const dummyList = [
+      { id: "c1", name: "Abhaya", text: "Abhaya learning NEXTjs" },
+      { id: "c2", name: "Shanky", text: "Shanky going to Japan" },
+      { id: "c3", name: "Dani", text: "Dani loves Web Development" },
+    ];
+
+    res.status(200).json({ comments: dummyList });
   }
 }
 
