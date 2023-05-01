@@ -31,7 +31,7 @@ function handler(req, res) {
     // const data = JSON.parse(fileData);
     // data.push(newFeedback);
     // fs.writeFileSync(filePath, JSON.stringify(data));
-    console.log(newFeedback);
+    console.log(newComment);
     res
       .status(201)
       .json({ message: "This works perfectly", comment: newComment });

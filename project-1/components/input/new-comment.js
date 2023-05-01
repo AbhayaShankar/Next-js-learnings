@@ -34,21 +34,21 @@ function NewComment(props) {
       text: enteredComment,
     });
 
-    const reqBody = {
-      email: enteredEmail,
-      name: enteredName,
-      text: enteredComment,
-    };
+    // const reqBody = {
+    //   email: enteredEmail,
+    //   name: enteredName,
+    //   text: enteredComment,
+    // };
 
-    fetch("/api/comments", {
-      method: "POST",
-      body: JSON.stringify(reqBody),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    // fetch("/api/comments", {
+    //   method: "POST",
+    //   body: JSON.stringify(reqBody),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => console.log(data));
   }
 
   return (
