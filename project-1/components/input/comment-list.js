@@ -1,4 +1,5 @@
 import classes from "./comment-list.module.css";
+import Loading from "../ui/Loading";
 
 function CommentList({ comments }) {
   // const { name, email, text } = comments;

@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
-
+import { useEffect, useState, useContext } from "react";
 import CommentList from "./comment-list";
 import NewComment from "./new-comment";
 import classes from "./comments.module.css";
+import NotificationContext from "../../store/notification-context";
 
 function Comments({ eventId }) {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
+
+  const notificationCtx = useContext(NotificationContext);
 
   useEffect(() => {
     fetch(`/api/comments/${eventId}`)
@@ -24,6 +26,12 @@ function Comments({ eventId }) {
   function addCommentHandler(commentData) {
     // send data to API
 
+    notificationCtx.showNotification({
+      title: "Signing up...",
+      message: "Signing up for newsletter registration...",
+      status: "pending",
+    });
+
     fetch(`/api/comments/${eventId}`, {
       method: "POST",
       body: JSON.stringify(commentData),
@@ -31,8 +39,31 @@ function Comments({ eventId }) {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return res
+          .json()
+          .then((data) => {
+            throw new Error(data.message || "Something went wrong");
+          })
+          .catch((error) => {
+            notificationCtx.showNotification({
+              title: "Error!",
+              message: error.message || "Something went wrong while signing up",
+              status: "error",
+            });
+          });
+      })
+      .then((data) => {
+        notificationCtx.showNotification({
+          title: "Success!",
+          message: "Successfully signed up for Newsletter",
+          status: "success",
+        });
+      });
   }
 
   return (
