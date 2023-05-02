@@ -21,4 +21,10 @@ Here I will list out all the thought process while I will be building this app a
 
    b. The Featured Posts section. - For now we can show some dummy data, then we can move forward with linking in the future.
 
-4.
+4. So, I have not yet designed the Hero Section but I have gone with the basic template for Hero Section with an image and a h1 text.
+
+5. Currently working on Featured Posts component.
+
+6. I have also deisgned the Navbar which i have implemented, looks great though!
+
+7. I will have to change the PostGrid and PostItem as per what i will need, but for now I think It's good.
