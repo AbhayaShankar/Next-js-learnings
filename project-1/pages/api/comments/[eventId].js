@@ -1,11 +1,30 @@
 import { MongoClient } from "mongodb";
 
+async function connectDatabase() {
+  const client = await MongoClient.connect(
+    "mongodb+srv://Abhaya:eZxG5or06nrJEbeD@cluster0.rcblahe.mongodb.net/newsletter?retryWrites=true&w=majority"
+  );
+
+  return client;
+}
+
+async function insertDocuments(client, documents) {
+  const db = client.db();
+
+  const result = await db.collection("comments").insertOne(documents);
+  return result;
+}
+
 async function handler(req, res) {
   const eventId = req.query.eventId;
 
-  const client = await MongoClient.connect(
-    "mongodb+srv://Abhaya:eZxG5or06nrJEbeD@cluster0.rcblahe.mongodb.net/events?retryWrites=true&w=majority"
-  );
+  let client;
+  try {
+    client = await connectDatabase();
+  } catch (error) {
+    res.status(500).json({ message: "Connecting to the Database failed" });
+    return;
+  }
 
   if (req.method === "POST") {
     const { email, name, text } = req.body;
@@ -20,37 +39,41 @@ async function handler(req, res) {
       text.trim() === ""
     ) {
       res.status(422).json({ message: "Invalid Inputs" });
+      client.close();
       return;
     }
 
     const newComment = {
-      id: new Date().toISOString(),
+      eventId: eventId,
       email,
       name,
       text,
     };
 
-    const db = client.db();
+    let result;
 
-    await db
-      .collection("comments")
-      .insertOne({ email: email, name: name, text: text });
-
-    console.log(newComment);
-
-    res
-      .status(201)
-      .json({ message: "This works perfectly", comment: newComment });
+    try {
+      result = await insertDocuments(client, newComment);
+      res
+        .status(201)
+        .json({ message: "This works perfectly", comment: newComment });
+    } catch (error) {
+      res.status(500).json({ message: "inserting Data failed" });
+    }
   }
 
   if (req.method === "GET") {
-    const dummyList = [
-      { id: "c1", name: "Abhaya", text: "Abhaya learning NEXTjs" },
-      { id: "c2", name: "Shanky", text: "Shanky going to Japan" },
-      { id: "c3", name: "Dani", text: "Dani loves Web Development" },
-    ];
-
-    res.status(200).json({ comments: dummyList });
+    try {
+      const db = client.db();
+      const documents = await db
+        .collection("comments")
+        .find()
+        .sort({ _id: -1 })
+        .toArray();
+      res.status(200).json({ comments: documents });
+    } catch (error) {
+      res.status(500).json({ message: "Getting database failed!" });
+    }
   }
 
   client.close();
