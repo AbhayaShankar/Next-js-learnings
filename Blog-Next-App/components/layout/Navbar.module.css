@@ -15,16 +15,13 @@
   z-index: 10;
 }
 
-.left_navbar p {
+.left_navbar p a {
   font-size: 32px;
   font-family: "Sacramento", cursive;
   letter-spacing: 1.2px;
   font-weight: 500;
-  color: #fcfcfc;
+  color: #e8e8e8;
   cursor: pointer;
-}
-
-.right_navbar {
 }
 
 .right_navbar ul {
@@ -38,11 +35,21 @@
   font-size: 20px;
   font-family: "Rubik Glitch", cursive;
   color: #b4b4b4;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .right_navbar ul li:hover {
+  color: #e2e2e2;
+}
+
+.right_navbar ul li a {
+  text-decoration: none;
+  color: #b4b4b4;
+  transition: color 0.3s ease;
+}
+
+.right_navbar ul li a:hover {
   color: #e2e2e2;
 }
