@@ -18,7 +18,13 @@ const PostItem = (props) => {
     <li className={classes.post}>
       <Link href={`/posts/${slug}`}>
         <div className={classes.image}>
-          <Image src={imagePath} alt={title} width={250} height={250} />
+          <Image
+            src={imagePath}
+            alt={title}
+            width={275}
+            height={250}
+            // layout="responsive"
+          />
         </div>
         <div className={classes.content}>
           <time>{formattedDate}</time>
