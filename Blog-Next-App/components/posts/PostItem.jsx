@@ -3,25 +3,27 @@ import classes from "./PostItem.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
-const PostItem = () => {
+const PostItem = (props) => {
+  const { title, image, excerpt, date, slug } = props.post;
+
+  const formattedDate = new Date(date).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  const imagePath = `/posts/${slug}/${image}`;
+
   return (
     <li className={classes.post}>
-      <Link href="/">
+      <Link href="/posts/first">
         <div className={classes.image}>
-          <Image
-            src="/posts/1.avif"
-            alt="Blog-image"
-            width={250}
-            height={250}
-          />
+          <Image src={imagePath} alt={title} width={250} height={250} />
         </div>
         <div className={classes.content}>
-          <time>May 3rd 2023</time>
-          <h3>TITLE OF THE BLOG</h3>
-          <p>
-            Basic Description of the blog in about 15-20 words not too much not
-            too less...
-          </p>
+          <time>{formattedDate}</time>
+          <h3>{title}</h3>
+          <p>{excerpt}</p>
         </div>
       </Link>
     </li>
