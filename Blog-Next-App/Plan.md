@@ -46,3 +46,7 @@ Here I will list out all the thought process while I will be building this app a
 ---
 
 10. I have to design the Single post page from scratch... Very bad design as of now...
+
+11. Writing JSX with markdown : package used : react-markdown - very handy while using Markdowns..
+
+12.
