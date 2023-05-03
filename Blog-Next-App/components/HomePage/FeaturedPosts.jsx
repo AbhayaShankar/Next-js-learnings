@@ -2,11 +2,11 @@ import React from "react";
 import classes from "./FeaturedPosts.module.css";
 import PostGrid from "../posts/PostGrid";
 
-const FeaturedPosts = () => {
+const FeaturedPosts = ({ posts }) => {
   return (
     <section className={classes.latest}>
       <h2>Featured Posts</h2>
-      <PostGrid />
+      <PostGrid posts={posts} />
     </section>
   );
 };
