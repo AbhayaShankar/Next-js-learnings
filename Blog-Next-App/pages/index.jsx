@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 import Hero from "../components/HomePage/Hero";
 import FeaturedPosts from "../components/HomePage/FeaturedPosts";
-import { DUMMY_POSTS } from "../helpers/DummyText";
+import { getFeaturedPosts } from "../lib/posts-utils";
 
-const HomePage = () => {
+const HomePage = ({ posts }) => {
   return (
     <Fragment>
       {/*  
@@ -12,9 +12,20 @@ const HomePage = () => {
          2. The Featured Posts section. - For now we can show some dummy data, then we can move forward with linking in the future.
      */}
       <Hero />
-      <FeaturedPosts posts={DUMMY_POSTS} />
+      <FeaturedPosts posts={posts} />
     </Fragment>
   );
 };
+
+export function getStaticProps() {
+  const featuredPosts = getFeaturedPosts();
+
+  return {
+    props: {
+      posts: featuredPosts,
+    },
+    revalidate: 6000,
+  };
+}
 
 export default HomePage;

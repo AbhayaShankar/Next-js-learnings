@@ -1,10 +1,20 @@
 import React from "react";
 // import PostGrid from "../../components/posts/PostGrid";
-import { DUMMY_POSTS } from "../../helpers/DummyText";
 import AllPosts from "../../components/posts/AllPosts";
+import { getAllPosts } from "../../lib/posts-utils";
 
-const AllPostsPage = () => {
-  return <AllPosts posts={DUMMY_POSTS} />;
+const AllPostsPage = ({ posts }) => {
+  return <AllPosts posts={posts} />;
 };
+
+export function getStaticProps() {
+  const allPosts = getAllPosts();
+
+  return {
+    props: {
+      posts: allPosts,
+    },
+  };
+}
 
 export default AllPostsPage;

@@ -20,7 +20,7 @@ const getPostsData = (fileName) => {
   return postData;
 };
 
-function getAllPosts() {
+export function getAllPosts() {
   const postFiles = fs.readdirSync(pathDirectory);
 
   const allPosts = postFiles.map((postFile) => {
@@ -32,4 +32,10 @@ function getAllPosts() {
   );
 
   return sortedPosts;
+}
+
+export function getFeaturedPosts() {
+  const allPosts = getAllPosts();
+  const featuredPosts = allPosts.filter((post) => post.isFeatured);
+  return featuredPosts;
 }
