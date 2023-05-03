@@ -28,3 +28,5 @@ Here I will list out all the thought process while I will be building this app a
 6. I have also deisgned the Navbar which i have implemented, looks great though!
 
 7. I will have to change the PostGrid and PostItem as per what i will need, but for now I think It's good.
+
+8. I have designed a basic structure of how the Blog post would look like and I think I will continue with that as of now. Later maybe if different design idea comes, I might change my mind...
