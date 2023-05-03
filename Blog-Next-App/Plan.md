@@ -49,4 +49,9 @@ Here I will list out all the thought process while I will be building this app a
 
 11. Writing JSX with markdown : package used : react-markdown - very handy while using Markdowns..
 
-12.
+12. Added selection pseudo code for entire body.
+
+13. wrapping text and fields inside 
+ `--- 
+ {content} 
+ ---` treats things as a meta data(gray-matter).
