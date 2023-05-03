@@ -55,3 +55,13 @@ Here I will list out all the thought process while I will be building this app a
  `--- 
  {content} 
  ---` treats things as a meta data(gray-matter).
+
+ 14. We used gray-matter library to use metadata and content within the markdown files to show fields like title, slug etc.
+
+15. All the helper fucntion used in fetching data is included in lib folder which consists of posts-util file. There we use fs and path from node to read every file inside the **blogPosts** folder, which are markdown files and then we filter out the data and content from there to distinguish what to show and what to filter and then we created helper functions to extarct the allposts and featuredPosts from there to present out data in the UI.
+
+16. using that we can then getAllPosts and featuredPosts.
+
+-- note: slug and the fileName inside the markdown file should be the same as we are fetching accoring  to that in file and setting the slug according to that.
+
+17. 

@@ -4,8 +4,8 @@ import PostHeader from "./PostHeader";
 import classes from "./PostContent.module.css";
 import { DUMMY_POSTS } from "../../../helpers/DummySinglePosts";
 
-const PostContent = () => {
-  const { title, image, content, slug } = DUMMY_POSTS;
+const PostContent = ({ post }) => {
+  const { title, image, content, slug } = post;
 
   const imagePath = `/posts/${slug}/${image}`;
   return (
