@@ -40,3 +40,9 @@ Here I will list out all the thought process while I will be building this app a
 8. I have designed a basic structure of how the Blog post would look like and I think I will continue with that as of now. Later maybe if different design idea comes, I might change my mind...
 
 9. All posts page and Home page are done, I have to tweak the design bit here and there but I think I will leave it for last and for now just complete the basic setting up all the routes and data in there.
+
+## 04.05.2023
+
+---
+
+10. I have to design the Single post page from scratch... Very bad design as of now...
