@@ -21,7 +21,7 @@ const ContactForm = () => {
           <textarea name="message" id="message" rows="6"></textarea>
         </div>
 
-        <div className={classes.action}>
+        <div className={classes.actions}>
           <button>Send Message</button>
         </div>
       </form>
