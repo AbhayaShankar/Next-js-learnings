@@ -13,7 +13,7 @@ isFeatured: false
 
 Welcome to Abhaya's Blog where you get access to all the latest tech Abhaya is learning and sharing. This is the starter course for people learning and starting out to Node.js
 
-NextJS is a **framework for ReactJS**.
+NextJS is a &nbsp;**framework for ReactJS**.
 
 Wait a second ... a "framework" for React? Isn't React itself already a framework for JavaScript?
 
@@ -35,9 +35,22 @@ In this article, we'll dive into the core concepts and features NextJS has to of
 
 ## File-based Routing
 
-![Create routes via your file + folder structure](/posts/getting-started-with-nextjs2/1.jpg)
+![Create routes via your file + folder structure](/posts/getting-started-with-nextjs2/2.jfif)
 
 ... More content ...
+
+```javascript
+export function getStaticPaths() {
+  const postFileNames = getPostsFiles();
+
+  const slugs = postFileNames.map((file) => file.replace(/\.md$/, ""));
+
+  return {
+    paths: slugs.map((slug) => ({ params: { slug: slug } })),
+    fallback: "blocking",
+  };
+}   
+```
  
  Lists
 
