@@ -5,6 +5,7 @@ import classes from "./PostContent.module.css";
 import Image from "next/image";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { md } from "../../../helpers/markdown-it";
 
 const PostContent = ({ post }) => {
   const { title, image, content, slug } = post;
