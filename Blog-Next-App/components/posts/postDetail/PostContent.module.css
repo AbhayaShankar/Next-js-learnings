@@ -4,15 +4,15 @@
   margin: var(--size-8) auto;
   font-size: var(--size-5);
   line-height: var(--size-8);
-  background-color: var(--color-grey-800);
+  /* background-color: var(--color-grey-800); */
   border-radius: 6px;
   padding: var(--size-4);
   transition: background-color 0.3s ease-in-out;
 }
 
-.content:hover {
+/* .content:hover {
   background-color: #262626;
-}
+} */
 
 .content p {
   color: var(--color-secondary);
