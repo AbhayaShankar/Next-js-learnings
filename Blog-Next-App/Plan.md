@@ -64,4 +64,12 @@ Here I will list out all the thought process while I will be building this app a
 
 -- note: slug and the fileName inside the markdown file should be the same as we are fetching accoring  to that in file and setting the slug according to that.
 
-17. 
+## 05.05.23
+
+---
+
+17. Replace react-markdown with markdown-it and all how all the depencies  work and how to implement them. Then We have to work upon how we can add different images and texts and code blocks in that.
+
+18. Re-design the Contact form page - go through dribbble and look for a better contact page which I would then implement.
+
+19.  
