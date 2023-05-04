@@ -6,7 +6,6 @@ image: "2.jfif"
 excerpt: "NEXTJS is the React framework for production - it makes building fullstack React apps and sites a breeze  and ships with built-in SSR/SSG."
 isFeatured: false
 
-
 ---
 
 # This is a Blog Post for Node.js
@@ -39,7 +38,8 @@ In this article, we'll dive into the core concepts and features NextJS has to of
 
 ... More content ...
 
-```javascript
+
+``` js
 export function getStaticPaths() {
   const postFileNames = getPostsFiles();
 
@@ -52,8 +52,3 @@ export function getStaticPaths() {
 }   
 ```
  
- Lists
-
-[ ] todo
-
-[x] done

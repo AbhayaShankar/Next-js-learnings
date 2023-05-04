@@ -3,6 +3,8 @@ import ReactMarkdown from "react-markdown";
 import PostHeader from "./PostHeader";
 import classes from "./PostContent.module.css";
 import Image from "next/image";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 const PostContent = ({ post }) => {
   const { title, image, content, slug } = post;
@@ -11,17 +13,17 @@ const PostContent = ({ post }) => {
   // console.log(slug);
 
   const customRenderers = {
-    // image(image) {
-    //   console.log("md Image slug", slug);
-    //   return (
-    //     <Image
-    //       src={`/posts/${slug}/${image.src}`}
-    //       alt={image.alt}
-    //       width={300}
-    //       height={300}
-    //     />
-    //   );
-    // },
+    image(image) {
+      console.log("md Image slug", slug);
+      return (
+        <Image
+          src={`/posts/${slug}/${image.src}`}
+          alt={image.alt}
+          width={300}
+          height={300}
+        />
+      );
+    },
 
     paragraph(paragraph) {
       const { node } = paragraph;
@@ -42,6 +44,14 @@ const PostContent = ({ post }) => {
       }
       return <p>{paragraph.children}</p>;
     },
+
+    code({ language, value }) {
+      return (
+        <SyntaxHighlighter language={language} style={atomDark}>
+          {value}
+        </SyntaxHighlighter>
+      );
+    },
   };
 
   return (
@@ -50,9 +60,9 @@ const PostContent = ({ post }) => {
       <ReactMarkdown
         className={classes.markdownContent}
         components={customRenderers}
-      >
-        {content}
-      </ReactMarkdown>
+        // renderers={customRenderers}
+        children={content}
+      />
     </article>
   );
 };
