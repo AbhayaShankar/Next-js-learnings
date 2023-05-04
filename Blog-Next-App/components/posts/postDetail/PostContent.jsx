@@ -8,17 +8,17 @@ const PostContent = ({ post }) => {
   const { title, image, content, slug } = post;
 
   const imagePath = `/posts/${slug}/${image}`;
-
-  console.log(slug);
+  // console.log(slug);
 
   const customRenderers = {
     image(image) {
+      console.log("md Image slug", slug);
       return (
         <Image
           src={`/posts/${slug}/${image.src}`}
           alt={image.alt}
           width={300}
-          height="auto"
+          height={300}
         />
       );
     },
@@ -27,7 +27,12 @@ const PostContent = ({ post }) => {
   return (
     <article className={classes.content}>
       <PostHeader title={title} image={imagePath} />
-      <ReactMarkdown components={customRenderers}>{content}</ReactMarkdown>
+      <ReactMarkdown
+        className={classes.markdownContent}
+        components={customRenderers}
+      >
+        {content}
+      </ReactMarkdown>
     </article>
   );
 };
