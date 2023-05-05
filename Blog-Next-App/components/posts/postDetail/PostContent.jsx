@@ -5,7 +5,7 @@ import classes from "./PostContent.module.css";
 import Image from "next/image";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { md } from "../../../helpers/markdown-it";
+import { md, sanitize } from "../../../helpers/markdown-it";
 
 const PostContent = ({ post }) => {
   const { title, image, content, slug } = post;
@@ -55,6 +55,8 @@ const PostContent = ({ post }) => {
     },
   };
 
+  const displayContent = md.render(content);
+
   return (
     <article className={classes.content}>
       <PostHeader title={title} image={imagePath} />
@@ -64,6 +66,7 @@ const PostContent = ({ post }) => {
         // renderers={customRenderers}
         children={content}
       />
+      <div> {displayContent} </div>
     </article>
   );
 };
