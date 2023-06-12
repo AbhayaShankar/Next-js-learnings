@@ -1,0 +1,24 @@
+{
+  "name": "nextjs-course",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "markdown-it": "^13.0.1",
+    "markdown-it-anchor": "^8.6.7",
+    "markdown-it-code-copy": "^0.1.1",
+    "markdown-it-highlightjs": "^4.0.1",
+    "markdown-it-iframe": "^1.0.0",
+    "next": "^13.0.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.7",
+    "react-syntax-highlighter": "^15.5.0",
+    "slugify": "^1.6.6"
+  }
+}
