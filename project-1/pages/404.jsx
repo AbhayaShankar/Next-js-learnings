@@ -25,6 +25,7 @@ function ErrorPage() {
       >
         OOOPSIIEEESSS!!! Something went wrong..
       </p>
+      <p>Abhishek Bgahe</p>
     </div>
   );
 }
